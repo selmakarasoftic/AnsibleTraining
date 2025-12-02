@@ -48,6 +48,11 @@
         state: enabled
       when: inventory_hostname in gorups['web']
       notify: Reload Firewall 
+
+    - name: Update MOTD from Jinja2 template
+      ansible.builtin.template:
+        src: templates/motd.jt
+        dest: /etc/motd
     
   handlers:
     - name: Reload Firewall
