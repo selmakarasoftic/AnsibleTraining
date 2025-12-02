@@ -51,7 +51,7 @@
 
     - name: Update MOTD from Jinja2 template
       ansible.builtin.template:
-        src: templates/motd.jt
+        src: templates/motd.j2
         dest: /etc/motd
     
   handlers:
