@@ -1,0 +1,30 @@
+---
+- name: Create IIS websites
+  hosts: node1
+  tasks:
+    - name: Create website on port 8080
+      ansible.windows.win_dsc:
+        resource_name: xWebsite
+        free_form: "{{ _free_form_ }}"
+    - name: Create website on port 8081
+      ansible.windows.win_dsc:
+        resource_name: xWebsite
+        free_form: "{{ _free_form_ }}"
+    - name: Open firewall for port 8080
+      community.windows.win_firewall_rule:
+        name: Allow port 8080
+        localport: "{{ _localport_ }}"
+        action: allow
+        direction: in
+        protocol: tcp
+        state: present
+        enabled: true
+    - name: Open firewall for port 8081
+      community.windows.win_firewall_rule:
+        name: Allow port 8081
+        localport: "{{ _localport_ }}"
+        action: allow
+        direction: in
+        protocol: tcp
+        state: present
+        enabled: true
